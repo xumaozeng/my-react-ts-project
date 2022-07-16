@@ -28,7 +28,9 @@ const Item: React.FC<ItemProp> = props => {
 
   function handleDelete(id: string) {
     return () => {
-      deleteTodos(id);
+      if (window.confirm("你确定删除吗？")) {
+        deleteTodos(id);
+      }
     };
   }
 
@@ -39,11 +41,7 @@ const Item: React.FC<ItemProp> = props => {
       onMouseLeave={handleMouse(false)}
     >
       <label>
-        <input
-          type="checkbox"
-          defaultChecked={done}
-          onChange={handleCheck(id)}
-        />
+        <input type="checkbox" checked={done} onChange={handleCheck(id)} />
         <span>{name}</span>
       </label>
       <button

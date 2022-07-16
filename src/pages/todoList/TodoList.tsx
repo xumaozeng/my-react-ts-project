@@ -36,6 +36,16 @@ const TodoList: React.FC<TodoListProps> = () => {
     setTodos(newTodos);
   }
 
+  function checkAll(done: boolean) {
+    const newTodos = todos.map(todo => ({ ...todo, done }));
+    setTodos(newTodos);
+  }
+
+  function clearAllDone() {
+    const newTodos = todos.filter(todo => !todo.done);
+    setTodos(newTodos);
+  }
+
   return (
     <>
       <h3>TodoList待办事项</h3>
@@ -47,7 +57,7 @@ const TodoList: React.FC<TodoListProps> = () => {
           changeTodos={changeTodos}
           deleteTodos={deleteTodos}
         />
-        <Footer />
+        <Footer todos={todos} checkAll={checkAll} clearAllDone={clearAllDone} />
       </div>
     </>
   );
