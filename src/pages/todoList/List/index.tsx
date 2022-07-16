@@ -10,14 +10,20 @@ import "./index.scss";
 interface ListProps {
   todos: todoState[];
   changeTodos: (id: string, done: boolean) => void;
+  deleteTodos: (id: string) => void;
 }
 const List: React.FC<ListProps> = props => {
-  const { todos, changeTodos } = props;
+  const { todos, changeTodos, deleteTodos } = props;
 
   return (
     <ul className="todo-main">
       {todos.map(todo => (
-        <Item key={todo.id} {...todo} changeTodos={changeTodos} />
+        <Item
+          key={todo.id}
+          {...todo}
+          changeTodos={changeTodos}
+          deleteTodos={deleteTodos}
+        />
       ))}
     </ul>
   );

@@ -8,9 +8,10 @@ import "./index.scss";
 
 interface ItemProp extends todoState {
   changeTodos: (id: string, done: boolean) => void;
+  deleteTodos: (id: string) => void;
 }
 const Item: React.FC<ItemProp> = props => {
-  const { id, name, done, changeTodos } = props;
+  const { id, name, done, changeTodos, deleteTodos } = props;
   const [mouse, setMouse] = useState<boolean>(false);
 
   function handleMouse(mouse: boolean) {
@@ -22,6 +23,12 @@ const Item: React.FC<ItemProp> = props => {
   function handleCheck(id: string) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       changeTodos(id, event.target.checked);
+    };
+  }
+
+  function handleDelete(id: string) {
+    return () => {
+      deleteTodos(id);
     };
   }
 
@@ -42,6 +49,7 @@ const Item: React.FC<ItemProp> = props => {
       <button
         className="btn btn-danger"
         style={{ display: mouse ? "inline-block" : "none" }}
+        onClick={handleDelete(id)}
       >
         删除
       </button>

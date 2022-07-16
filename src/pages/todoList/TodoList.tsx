@@ -31,13 +31,22 @@ const TodoList: React.FC<TodoListProps> = () => {
     setTodos(newTodos);
   }
 
+  function deleteTodos(id: string) {
+    const newTodos: todoState[] = todos.filter(todo => todo.id !== id);
+    setTodos(newTodos);
+  }
+
   return (
     <>
       <h3>TodoList待办事项</h3>
       <hr />
       <div className="todo-container">
         <Header todos={todos} addTodos={addTodos} />
-        <List todos={todos} changeTodos={changeTodos} />
+        <List
+          todos={todos}
+          changeTodos={changeTodos}
+          deleteTodos={deleteTodos}
+        />
         <Footer />
       </div>
     </>
