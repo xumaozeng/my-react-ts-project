@@ -6,13 +6,22 @@ import React, { useState } from "react";
 import { todoState } from "../types";
 import "./index.scss";
 
-const Item: React.FC<todoState> = props => {
-  const { name, done } = props;
+interface ItemProp extends todoState {
+  changeTodos: (id: string, done: boolean) => void;
+}
+const Item: React.FC<ItemProp> = props => {
+  const { id, name, done, changeTodos } = props;
   const [mouse, setMouse] = useState<boolean>(false);
 
   function handleMouse(mouse: boolean) {
     return () => {
       setMouse(mouse);
+    };
+  }
+
+  function handleCheck(id: string) {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
+      changeTodos(id, event.target.checked);
     };
   }
 
@@ -23,7 +32,11 @@ const Item: React.FC<todoState> = props => {
       onMouseLeave={handleMouse(false)}
     >
       <label>
-        <input type="checkbox" defaultChecked={done} />
+        <input
+          type="checkbox"
+          defaultChecked={done}
+          onChange={handleCheck(id)}
+        />
         <span>{name}</span>
       </label>
       <button

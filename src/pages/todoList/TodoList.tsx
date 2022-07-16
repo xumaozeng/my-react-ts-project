@@ -15,12 +15,19 @@ const TodoList: React.FC<TodoListProps> = () => {
   const [todos, setTodos] = useState<todoState[]>([
     { id: "001", name: "吃饭", done: true },
     { id: "002", name: "睡觉", done: true },
-    { id: "003", name: "打豆豆", done: false },
+    { id: "003", name: "打豆豆", done: false }
   ]);
 
   function addTodos(todoObj: todoState) {
     const newTodos = [todoObj, ...todos];
-    console.log(newTodos);
+    setTodos(newTodos);
+  }
+
+  function changeTodos(id: string, done: boolean) {
+    const newTodos: todoState[] = todos.map(todo => {
+      if (todo.id === id) return { ...todo, done };
+      return todo;
+    });
     setTodos(newTodos);
   }
 
@@ -30,7 +37,7 @@ const TodoList: React.FC<TodoListProps> = () => {
       <hr />
       <div className="todo-container">
         <Header todos={todos} addTodos={addTodos} />
-        <List todos={todos} />
+        <List todos={todos} changeTodos={changeTodos} />
         <Footer />
       </div>
     </>
