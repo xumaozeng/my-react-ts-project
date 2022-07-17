@@ -9,6 +9,7 @@
 src
     pages
         todoList  //这是一个完整的代办事项
+        Axios.tsx //axios请求与代理的使用
     ...
 ```
 
@@ -27,3 +28,58 @@ src
 
 4.  注意 defaultChecked 和 checked 的区别，类似的还有：defaultValue 和 value
 5.  状态在哪里，操作状态的方法就在哪里
+
+#### Axios请求与代理的使用
+
+###### 方法一
+
+> 在package.json文件中追加如下配置
+
+```
+"proxy":"http://localhost:5000"
+```
+
+说明：
+
+1. 优点：配置简单，前端请求资源时可以不加任何前缀
+2. 缺点：不能配置多个代理
+3. 工作方式：上述方式配置代理，当请求了3000不存在的资源时，那么该请求会转发给5000（优先匹配前端资源public文件夹下，public指代当前根目录）
+
+###### 方法二
+
+1. 第一步：创建代理配置文件
+
+   ```
+   在src下创建配置文件：src/setupProxy.js //只能使用CommonJS方式
+   ```
+
+2. 编写setupProxy.js配置具体代理规则：
+
+   ```
+   const { createProxyMiddleware } = require("http-proxy-middleware");
+   
+   module.exports = function (app) {
+     app.use(
+       "/api_student", //请求前缀，所有带有此前缀的都会转发给目标地址
+       createProxyMiddleware({
+         target: "http://localhost:5000", //配置转发目标地址
+         changeOrigin: true, //请求头中host字段
+         pathRewrite: { "^/api_student": "" } //取出请求前缀
+       })
+     );
+     app.use(
+       "/api_car",
+       createProxyMiddleware({
+         target: "http://localhost:5001",
+         changeOrigin: true,
+         pathRewrite: { "^/api_car": "" }
+       })
+     );
+   };
+   ```
+
+   说明：
+
+   1. 优点：可以配置多个代理，灵活的控制请求是否走代理
+   2. 缺点：配置繁琐，前端请求资源时必须加前缀
+
