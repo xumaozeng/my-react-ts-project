@@ -1,9 +1,9 @@
-import TodoList from "./pages/todoList/TodoList";
+import Axios from "./pages/Axios";
 
 function App() {
   return (
     <div className="App">
-      <TodoList />
+      <Axios />
     </div>
   );
 }
