@@ -15,6 +15,8 @@ src
 
 #### todoList 待办事项
 
+> 注意删除public/index.html中的bootstrap引用link样式覆盖
+
 1.  拆分组件、实现静态组件，注意：className、style 的写法
 2.  动态初始化列表，如何确定将数据放在哪个组件的 state 中：
 
