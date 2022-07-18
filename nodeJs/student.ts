@@ -1,8 +1,9 @@
 /**
  * 学生student的接口
  */
+import express from "express";
+import { studentProps } from "./types";
 
-const express = require("express");
 const app = express();
 
 app.use((request, response, next) => {
@@ -13,7 +14,7 @@ app.use((request, response, next) => {
 });
 
 app.get("/students", (request, response) => {
-  const students = [
+  const students: studentProps[] = [
     { id: "001", name: "小张", age: 18 },
     { id: "002", name: "小李", age: 19 },
     { id: "003", name: "小红", age: 20 }
@@ -21,9 +22,8 @@ app.get("/students", (request, response) => {
   response.send(students);
 });
 
-app.listen(5000, err => {
-  if (!err)
-    console.log(
-      "服务器启动成了，请求学生信息地址为：http://localhost:5000/students"
-    );
+app.listen(5000, () => {
+  console.log(
+    "服务器启动成了，请求学生信息地址为：http://localhost:5000/students"
+  );
 });

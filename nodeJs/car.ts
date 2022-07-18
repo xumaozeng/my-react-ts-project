@@ -1,8 +1,9 @@
 /**
  * 学生student的接口
  */
+import express from "express";
+import { carProps } from "./types";
 
-const express = require("express");
 const app = express();
 
 app.use((request, response, next) => {
@@ -11,7 +12,7 @@ app.use((request, response, next) => {
 });
 
 app.get("/cars", (request, response) => {
-  const cars = [
+  const cars: carProps[] = [
     { id: "001", name: "奔驰", price: 300000 },
     { id: "002", name: "宝马", price: 340000 },
     { id: "003", name: "雷克萨斯", price: 400000 }
@@ -19,9 +20,6 @@ app.get("/cars", (request, response) => {
   response.send(cars);
 });
 
-app.listen(5001, err => {
-  if (!err)
-    console.log(
-      "服务器启动成了，请求学生信息地址为：http://localhost:5001/cars"
-    );
+app.listen(5001, () => {
+  console.log("服务器启动成了，请求学生信息地址为：http://localhost:5001/cars");
 });
