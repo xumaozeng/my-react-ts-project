@@ -1,9 +1,9 @@
-import Axios from "./pages/Axios";
+import GithubSearch from "@/pages/githubSearch/GithubSearch";
 
 function App() {
   return (
     <div className="App">
-      <Axios />
+      <GithubSearch />
     </div>
   );
 }
