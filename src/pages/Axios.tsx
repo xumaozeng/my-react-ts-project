@@ -21,14 +21,14 @@ const Axios: React.FC = () => {
   const [cars, setCars] = useState<carProps[]>([]);
 
   function getStudentData() {
-    axios.get("http://localhost:3000/api_student/students").then(res => {
+    axios.get("/api_student/students").then(res => {
       const students = res.data;
       setStudents(students);
     });
   }
 
   function getCarData() {
-    axios.get("http://localhost:3000/api_car/cars").then(res => {
+    axios.get("/api_car/cars").then(res => {
       const cars = res.data;
       setCars(cars);
     });
