@@ -17,4 +17,12 @@ module.exports = function (app) {
       pathRewrite: { "^/api_car": "" }
     })
   );
+  app.use(
+    "/api_search",
+    createProxyMiddleware({
+      target: "http://localhost:5002",
+      changeOrigin: true,
+      pathRewrite: { "^/api_search": "" }
+    })
+  );
 };
