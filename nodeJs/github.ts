@@ -1,5 +1,5 @@
 /**
- * 后端代理到https://api.github.com/search/users?q=atguigu
+ * 后端重定向到https://api.github.com/search/users?q=atguigu
  */
 
 import express from "express";
@@ -13,7 +13,8 @@ app.use((request, response, next) => {
 });
 
 app.get("/search/users", (request, response) => {
-  response.send(request.query);
+  const { q } = request.query;
+  response.redirect(`https://api.github.com/search/users?q=${q}`);
 });
 
 app.listen(5002, () => {

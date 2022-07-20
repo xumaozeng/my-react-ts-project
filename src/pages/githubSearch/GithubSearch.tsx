@@ -1,16 +1,22 @@
 /**
  * github搜索组件
  */
-import React from "react";
+import React, { useState } from "react";
 import Search from "./Search";
 import List from "./List";
+import { userProps } from "./types";
 
-interface GithubSearchProps {}
-const GithubSearch: React.FC<GithubSearchProps> = () => {
+const GithubSearch: React.FC = () => {
+  const [users, setUsers] = useState<userProps[]>([]);
+
+  function search(users: userProps[]) {
+    setUsers(users);
+  }
+
   return (
     <div className="container">
-      <Search />
-      <List />
+      <Search search={search} />
+      <List users={users} />
     </div>
   );
 };
