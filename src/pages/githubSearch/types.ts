@@ -8,3 +8,14 @@ export interface userProps {
   id: number;
   login: string;
 }
+
+export interface errProps {
+  message: string;
+}
+
+export interface dataProps {
+  users?: userProps[];
+  isFirst?: boolean;
+  loading?: boolean;
+  err?: errProps;
+}

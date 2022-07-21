@@ -4,10 +4,10 @@
 
 import React, { useRef } from "react";
 import axios from "axios";
-import { userProps } from "../types";
+import { dataProps, errProps } from "../types";
 
 interface SearchProps {
-  search: (users: userProps[]) => void;
+  search: (dataObj: dataProps) => void;
 }
 const Search: React.FC<SearchProps> = props => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,14 +15,16 @@ const Search: React.FC<SearchProps> = props => {
 
   function handleSearch() {
     const keyWords = inputRef.current?.value;
+    search({ isFirst: false, loading: true });
     axios
       .get(`/api_search/search/users?q=${keyWords}`)
       .then(res => {
         const { items } = res.data;
-        search(items);
+        search({ users: items, loading: false });
       })
-      .catch(err => {
+      .catch((err: errProps) => {
         console.log(err);
+        search({ err, loading: false });
       });
   }
 

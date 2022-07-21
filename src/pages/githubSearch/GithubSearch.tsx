@@ -4,19 +4,25 @@
 import React, { useState } from "react";
 import Search from "./Search";
 import List from "./List";
-import { userProps } from "./types";
+import { dataProps } from "./types";
 
+const initialArgs: dataProps = {
+  users: [],
+  isFirst: true,
+  loading: false,
+  err: undefined
+};
 const GithubSearch: React.FC = () => {
-  const [users, setUsers] = useState<userProps[]>([]);
+  const [data, setData] = useState<dataProps>(initialArgs);
 
-  function search(users: userProps[]) {
-    setUsers(users);
+  function search(dataObj: dataProps) {
+    setData(prev => ({ ...prev, ...dataObj }));
   }
 
   return (
     <div className="container">
       <Search search={search} />
-      <List users={users} />
+      <List {...data} />
     </div>
   );
 };
