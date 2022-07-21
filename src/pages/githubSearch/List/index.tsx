@@ -1,13 +1,31 @@
 /**
  * List组件
  */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { dataProps } from "../types";
+import PubSub from "pubsub-js";
 import "./index.scss";
 
-type ListProps = dataProps;
-const List: React.FC<ListProps> = props => {
-  const { users, isFirst, loading, err } = props;
+const initialArgs: dataProps = {
+  users: [],
+  isFirst: true,
+  loading: false,
+  err: undefined
+};
+const List: React.FC = props => {
+  const [data, setData] = useState<dataProps>(initialArgs);
+  const { isFirst, loading, users, err } = data;
+
+  function updateData(_: string, dataObj: dataProps) {
+    setData(prev => ({ ...prev, ...dataObj }));
+  }
+
+  useEffect(() => {
+    const token = PubSub.subscribe("xq", updateData);
+    return () => {
+      PubSub.unsubscribe(token);
+    };
+  }, []);
 
   return (
     <div className="row">

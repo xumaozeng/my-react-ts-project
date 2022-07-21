@@ -1,7 +1,7 @@
 /**
  * github搜索组件
  */
-import React, { useState } from "react";
+/* import React, { useState } from "react";
 import Search from "./Search";
 import List from "./List";
 import { dataProps } from "./types";
@@ -23,6 +23,21 @@ const GithubSearch: React.FC = () => {
     <div className="container">
       <Search search={search} />
       <List {...data} />
+    </div>
+  );
+};
+export default GithubSearch; */
+
+// 使用pubsub发布订阅模式
+import React from "react";
+import Search from "./Search";
+import List from "./List";
+
+const GithubSearch: React.FC = () => {
+  return (
+    <div className="container">
+      <Search />
+      <List />
     </div>
   );
 };
