@@ -1,8 +1,9 @@
 /**
- * 后端重定向到https://api.github.com/search/users?q=atguigu
+ * 后端请求https://api.github.com/search/users?q=atguigu
  */
 
 import express from "express";
+import axios from "axios";
 
 const app = express();
 
@@ -12,9 +13,10 @@ app.use((request, response, next) => {
   next();
 });
 
-app.get("/search/users", (request, response) => {
+app.get("/search/users", async (request, response) => {
   const { q } = request.query;
-  response.redirect(`https://api.github.com/search/users?q=${q}`);
+  const res = await axios.get("https://api.github.com/search/users", { params: { q } });
+  response.json(res.data);
 });
 
 app.listen(5002, () => {
