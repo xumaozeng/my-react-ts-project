@@ -4,11 +4,12 @@
  */
 
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Header from "@/components/Header";
 import MyNavLink from "@/components/MyNavLink";
 import About from "./About";
 import Home from "./Home";
+import Test from "./Test";
 
 interface SimpleRouterProps {}
 const SimpleRouter: React.FC<SimpleRouterProps> = props => {
@@ -29,8 +30,11 @@ const SimpleRouter: React.FC<SimpleRouterProps> = props => {
         <div className="col-xs-6">
           <div className="panel">
             <div className="panel-body">
-              <Route path="/about" component={About} />
-              <Route path="/home" component={Home} />
+              <Switch>
+                <Route path="/about" component={About} />
+                <Route path="/home" component={Test} />
+                <Route path="/home" component={Home} />
+              </Switch>
             </div>
           </div>
         </div>
