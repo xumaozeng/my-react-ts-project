@@ -1,9 +1,9 @@
-import GithubSearch from "@/pages/githubSearch/GithubSearch";
+import SimpleRouter from "@/pages/SimpleRouter";
 
 function App() {
   return (
     <div className="App">
-      <GithubSearch />
+      <SimpleRouter />
     </div>
   );
 }
