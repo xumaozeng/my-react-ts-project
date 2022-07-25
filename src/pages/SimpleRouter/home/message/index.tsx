@@ -17,12 +17,22 @@ const Message: React.FC = props => {
       <ul>
         {messageData.map(message => (
           <li key={message.id}>
-            <Link to={`/home/message/${message.id}/${message.title}`}>{message.title}</Link>
+            {/* params方式传参 */}
+            {/* <Link to={`/home/message/${message.id}/${message.title}`}>{message.title}</Link> */}
+            {/* search方式传参 */}
+            {/* <Link to={`/home/message?id=${message.id}&title=${message.title}`}>{message.title}</Link> */}
+            {/* state方式传参 */}
+            <Link to={{ pathname: "/home/message", state: { id: message.id, title: message.title } }}>
+              {message.title}
+            </Link>
           </li>
         ))}
       </ul>
       <hr />
-      <Route path="/home/message/:id/:title" component={Detail} />
+      {/* params方式注册路由 */}
+      {/* <Route path="/home/message/:id/:title" component={Detail} /> */}
+      {/* search和state方式注册路由 */}
+      <Route path="/home/message" component={Detail} />
     </>
   );
 };
