@@ -7,8 +7,8 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "@/components/Header";
 import MyNavLink from "@/components/MyNavLink";
-import About from "./About";
-import Home from "./Home";
+import About from "./about";
+import Home from "./home";
 
 interface SimpleRouterProps {}
 const SimpleRouter: React.FC<SimpleRouterProps> = props => {
@@ -32,7 +32,7 @@ const SimpleRouter: React.FC<SimpleRouterProps> = props => {
               <Switch>
                 <Route path="/about" component={About} />
                 <Route path="/home" component={Home} />
-                <Redirect to="/home" />
+                <Redirect to="/about" />
               </Switch>
             </div>
           </div>
