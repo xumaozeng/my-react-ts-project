@@ -4,8 +4,8 @@
 
 import React from "react";
 import {
-  // useParams,
-  useLocation
+  useParams
+  //   useLocation
 } from "react-router-dom";
 // import { parse } from "querystring";
 import { detailProp, messageProps } from "../types";
@@ -16,13 +16,10 @@ const detailData: detailProp[] = [
   { id: "03", content: "你好，未来" }
 ];
 const Detail: React.FC = () => {
-  const {
-    //   search,
-    state
-  } = useLocation();
-  const { id, title } = (state as messageProps) || {}; // state方式
+  //   const { search, state } = useLocation();
+  //   const { id, title } = (state as messageProps) || {}; // state方式
   //   const { id, title } = parse(search.slice(1)) as messageProps; // search方式
-  //   const { id, title } = useParams<messageProps>(); // params方式
+  const { id, title } = useParams<messageProps>(); // params方式
   const findResult = detailData.find(item => item.id === id);
 
   return (
