@@ -15,13 +15,15 @@ const Message: React.FC = () => {
   const { push, replace, goForward, goBack, go } = useHistory();
 
   function pushShow(messageObj: messageProps) {
-    const { id, title } = messageObj;
-    push(`/home/message/${id}/${title}`);
+    // const { id, title } = messageObj;
+    // push(`/home/message/detail/${id}/${title}`);
+    push("/home/message/detail", messageObj);
   }
 
   function replaceShow(messageObj: messageProps) {
-    const { id, title } = messageObj;
-    replace(`/home/message/${id}/${title}`);
+    // const { id, title } = messageObj;
+    // replace(`/home/message/detail/${id}/${title}`);
+    replace("/home/message/detail", messageObj);
   }
 
   function forward() {
@@ -42,13 +44,13 @@ const Message: React.FC = () => {
         {messageData.map(message => (
           <li key={message.id}>
             {/* params方式传参 */}
-            <Link to={`/home/message/${message.id}/${message.title}`}>{message.title}</Link>
+            {/* <Link to={`/home/message/detail/${message.id}/${message.title}`}>{message.title}</Link> */}
             {/* search方式传参 */}
-            {/* <Link to={`/home/message?id=${message.id}&title=${message.title}`}>{message.title}</Link> */}
+            {/* <Link to={`/home/message/detail?id=${message.id}&title=${message.title}`}>{message.title}</Link> */}
             {/* state方式传参 */}
-            {/* <Link to={{ pathname: "/home/message", state: { id: message.id, title: message.title } }}>
+            <Link to={{ pathname: "/home/message/detail", state: { id: message.id, title: message.title } }}>
               {message.title}
-            </Link> */}
+            </Link>
             &nbsp;<button onClick={() => pushShow(message)}>push</button>
             &nbsp;<button onClick={() => replaceShow(message)}>replace</button>
           </li>
@@ -56,9 +58,9 @@ const Message: React.FC = () => {
       </ul>
       <hr />
       {/* params方式注册路由 */}
-      <Route path="/home/message/:id/:title" component={Detail} />
+      {/* <Route path="/home/message/detail/:id/:title" component={Detail} /> */}
       {/* search和state方式注册路由 */}
-      {/* <Route path="/home/message" component={Detail} /> */}
+      <Route path="/home/message/detail" component={Detail} />
       <button onClick={forward}>前进</button>
       &nbsp;<button onClick={back}>后退</button>
       &nbsp;<button onClick={gone}>go</button>
