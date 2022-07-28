@@ -1,9 +1,9 @@
-import SimpleRouter from "@/pages/SimpleRouter";
+import Example from "@/pages/example/Example";
 
 function App() {
   return (
     <div className="App">
-      <SimpleRouter />
+      <Example />
     </div>
   );
 }

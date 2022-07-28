@@ -1,4 +1,4 @@
-import { RootState } from "../../store";
+import { RootState } from "@/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type ExampleState = string;
@@ -10,8 +10,8 @@ export const exampleSlice = createSlice({
   initialState,
   reducers: {
     changeState: (_, action: PayloadAction<string>) => action.payload,
-    resetState: () => initialState,
-  },
+    resetState: () => initialState
+  }
 });
 
 export const { changeState, resetState } = exampleSlice.actions;
