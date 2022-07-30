@@ -1,9 +1,9 @@
-import Example from "@/pages/example/Example";
+import Count from "@/pages/countRedux";
 
 function App() {
   return (
     <div className="App">
-      <Example />
+      <Count />
     </div>
   );
 }
