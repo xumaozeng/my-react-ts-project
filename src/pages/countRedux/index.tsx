@@ -4,17 +4,17 @@
 
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { ActionProps } from "./redux/types";
+import { ActionProps, DispatchProps, StateProps } from "./redux/types";
 import Count from "./Count";
 import { countAsyncIncrementAction, countDecrementAction, countIncrementAction } from "./redux/count_action";
 
-function mapStateToProps(state: number) {
+function mapStateToProps(state: number): StateProps {
   return {
     count: state
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<ActionProps>) {
+function mapDispatchToProps(dispatch: Dispatch<ActionProps>): DispatchProps {
   return {
     increment: (value: number) => dispatch(countIncrementAction(value)),
     decrement: (value: number) => dispatch(countDecrementAction(value)),
