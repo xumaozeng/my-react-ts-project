@@ -2,9 +2,10 @@
  * 全局唯一仓库数据store
  */
 
-import { configureStore } from "@reduxjs/toolkit";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import countReducer from "./count_reducer";
 
-const store = configureStore({ reducer: countReducer });
+const store = createStore(countReducer, applyMiddleware(thunk));
 
 export default store;

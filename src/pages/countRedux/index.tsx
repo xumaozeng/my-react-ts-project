@@ -2,10 +2,10 @@
  * redux版本的计数器
  */
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Space, Select } from "antd";
 import store from "./redux/store";
-import { countDecrementAction, countIncrementAction } from "./redux/count_action";
+import { countAsyncIncrementAction, countDecrementAction, countIncrementAction } from "./redux/count_action";
 import useForceUpdate from "@/hooks/useForceUpdate";
 
 const { Option } = Select;
@@ -13,7 +13,6 @@ const { Option } = Select;
 const Count: React.FC = () => {
   const [value, updateValue] = useState<number>(1);
   const count = store.getState();
-  const timer = useRef<any>(null);
   const forceUpdate = useForceUpdate();
 
   useEffect(() => {
@@ -24,7 +23,6 @@ const Count: React.FC = () => {
 
     return () => {
       unsubscribe();
-      clearTimeout(timer.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -49,9 +47,7 @@ const Count: React.FC = () => {
   }
 
   function incrementAsync() {
-    timer.current = setTimeout(() => {
-      store.dispatch(countIncrementAction(value));
-    }, 1000);
+    store.dispatch(countAsyncIncrementAction(value, 1000));
   }
 
   return (
