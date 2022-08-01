@@ -9,9 +9,9 @@ export default function countReducer(state: number = initialState, action: Actio
   const { type, data } = action;
   switch (type) {
     case INCREMENT:
-      return state + data;
+      return state + data!;
     case DECREMENT:
-      return state - data;
+      return state - data!;
     default:
       return state;
   }
