@@ -1,13 +1,11 @@
-import { Provider } from "react-redux";
-import store from "@/pages/countRedux/redux/store";
-import Count from "@/pages/countRedux";
+import Count from "@/pages/counter";
+import Person from "@/pages/person";
 
 function App() {
   return (
     <div className="App">
-      <Provider store={store}>
-        <Count />
-      </Provider>
+      <Count />
+      <Person />
     </div>
   );
 }
