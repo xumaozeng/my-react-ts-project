@@ -3,12 +3,13 @@
  * 路由组件和一般组件
  */
 
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "@/components/Header";
 import MyNavLink from "@/components/MyNavLink";
-import About from "./about";
-import Home from "./home";
+
+const About = lazy(() => import("./about"));
+const Home = lazy(() => import("./home"));
 
 interface SimpleRouterProps {}
 const SimpleRouter: React.FC<SimpleRouterProps> = props => {
@@ -29,11 +30,13 @@ const SimpleRouter: React.FC<SimpleRouterProps> = props => {
         <div className="col-xs-6">
           <div className="panel">
             <div className="panel-body">
-              <Switch>
-                <Route path="/about" component={About} />
-                <Route path="/home" component={Home} />
-                <Redirect to="/about" />
-              </Switch>
+              <Suspense fallback={<h2>Loading...</h2>}>
+                <Switch>
+                  <Route path="/about" component={About} />
+                  <Route path="/home" component={Home} />
+                  <Redirect to="/about" />
+                </Switch>
+              </Suspense>
             </div>
           </div>
         </div>

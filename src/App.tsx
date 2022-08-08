@@ -1,11 +1,9 @@
-import Count from "@/pages/counter";
-import Person from "@/pages/person";
+import SimpleRouter from "./pages/SimpleRouter";
 
 function App() {
   return (
     <div className="App">
-      <Count />
-      <Person />
+      <SimpleRouter />
     </div>
   );
 }
