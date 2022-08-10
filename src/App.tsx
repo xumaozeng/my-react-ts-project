@@ -1,9 +1,9 @@
-import SimpleRouter from "./pages/SimpleRouter";
+import Parent from "./pages/context";
 
 function App() {
   return (
     <div className="App">
-      <SimpleRouter />
+      <Parent />
     </div>
   );
 }
