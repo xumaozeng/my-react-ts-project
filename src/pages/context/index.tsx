@@ -1,8 +1,10 @@
 /**
  * 使用context上下文
  */
+
 import React, { useContext, ReactNode } from "react";
 import { MyContext } from "./context";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import "./index.scss";
 
 // parent
@@ -12,7 +14,9 @@ const Person: React.FC = () => {
       <h2>我是父组件</h2>
       <MyContext.Provider value="小徐">
         {/* <Son /> */}
-        <Son render={age => <Grand age={age} />} />
+        <ErrorBoundary>
+          <Son render={age => <Grand age={age} />} />
+        </ErrorBoundary>
       </MyContext.Provider>
     </div>
   );
