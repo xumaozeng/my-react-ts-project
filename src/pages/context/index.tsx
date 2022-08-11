@@ -1,7 +1,7 @@
 /**
  * 使用context上下文
  */
-import React, { useContext } from "react";
+import React, { useContext, ReactNode } from "react";
 import { MyContext } from "./context";
 import "./index.scss";
 
@@ -11,29 +11,38 @@ const Person: React.FC = () => {
     <div className="parent">
       <h2>我是父组件</h2>
       <MyContext.Provider value="小徐">
-        <Son />
+        {/* <Son /> */}
+        <Son render={age => <Grand age={age} />} />
       </MyContext.Provider>
     </div>
   );
 };
 
 // son
-const Son: React.FC = () => {
+interface SonProps {
+  render: (age: number) => ReactNode;
+}
+const Son: React.FC<SonProps> = props => {
   return (
     <div className="son">
       <h2>我是儿子组件</h2>
-      <Grand />
+      {props.render(27)}
     </div>
   );
 };
 
 // grand
-const Grand: React.FC = () => {
+interface GrandProps {
+  age: number;
+}
+const Grand: React.FC<GrandProps> = props => {
   const username = useContext(MyContext);
   return (
     <div className="grand">
       <h2>我是孙子组件</h2>
-      <h4>我从爷爷组件中拿到的数据是：{username}</h4>
+      <h4>
+        我从爷爷组件中拿到的数据是：{username}，年龄：{props.age}
+      </h4>
     </div>
   );
 };
