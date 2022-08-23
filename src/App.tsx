@@ -1,9 +1,9 @@
-import Parent from "./pages/context";
+import Count from "@/pages/test/Count";
 
 function App() {
   return (
     <div className="App">
-      <Parent />
+      <Count />
     </div>
   );
 }
